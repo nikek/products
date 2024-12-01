@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "UI Sans";
+  src: url(/UI_Sans_v10_Light.woff2) format("woff2");
+  /* font-style: normal; */
+  font-weight: 200;
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: "UI Sans";
+  src: url(/UI_Sans_v10_Regular.woff2) format("woff2");
+  /* font-style: normal; */
+  font-weight: 400;
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: "UI Sans";
+  src: url(/UI_Sans_v10_Bold.woff2) format("woff2");
+  /* font-style: normal; */
+  font-weight: 700;
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+}
+
+:root {
+  --ui-ublue-6: #0066ff;
+  --ui-neutral-10: #50565e;
+  --ui-neutral-3: #ededf0;
+  --ui-neutral-2: #f4f5f6;
+  --text-3: #808893;
+
+  font-family: "UI Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  gap: 1rem;
+  align-items: center;
+
+  height: 50px;
+  margin: 0;
+  padding-inline: 0.5rem 32px;
+  background-color: var(--ui-neutral-2);
+}

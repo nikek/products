@@ -1,0 +1,18 @@
+.headerLogo {
+  display: inline-block;
+  font-size: 0; /* remove bottom space*/
+  padding: 0.5rem;
+
+  path {
+    transition-duration: 250ms;
+    transition-property: fill, outline;
+  }
+  &:hover {
+    path {
+      fill: var(--ui-ublue-6, #0066ff);
+    }
+  }
+  &:focus-visible {
+    outline: 1px solid var(--ui-ublue-6, #0066ff);
+  }
+}
