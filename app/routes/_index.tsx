@@ -29,7 +29,12 @@ export default function Index() {
         />
         <button
           onClick={() => {
-            if ("startViewTransition" in document) {
+            if (
+              "startViewTransition" in document &&
+              "matchMedia" in window &&
+              window.matchMedia("(prefers-reduced-motion: no-preference)")
+                .matches === true
+            ) {
               document.startViewTransition(() => {
                 flushSync(() => {
                   setIsList(!isList);

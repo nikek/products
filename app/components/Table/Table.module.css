@@ -14,10 +14,12 @@
     height: 32px;
     border-block-end: 1px solid var(--ui-neutral-3);
 
-    transition-duration: 600ms;
-    transition-timing-function: cubic-bezier(0.1, 0.77, 0.01, 1);
-    transition-property: opacity, translate;
-    transition-delay: var(--delay, 0);
+    @media (prefers-reduced-motion: no-preference) {
+      transition-duration: 600ms;
+      transition-timing-function: cubic-bezier(0.1, 0.77, 0.01, 1);
+      transition-property: opacity, translate;
+      transition-delay: var(--delay, 0);
+    }
   }
 
   td {

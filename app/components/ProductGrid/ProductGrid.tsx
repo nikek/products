@@ -16,7 +16,6 @@ export default function ProductGrid({ search }: { search: string }) {
             style={
               {
                 "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
-                viewTransitionName: i < 30 ? "el" + d.id : "initial",
               } as React.CSSProperties
             }
           >
