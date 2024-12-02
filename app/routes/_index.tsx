@@ -1,10 +1,9 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { useState } from "react";
 import Table from "~/components/Table/Table";
-import { flushSync } from "react-dom";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
-import Search from "~/components/Search";
+import Search from "~/components/Search/Search";
 import type { LayoutTypes } from "~/types";
 
 export const meta: MetaFunction = () => {
@@ -15,7 +14,6 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const size = 48;
   const [layout, setLayout] = useState<LayoutTypes>("list");
   const [search, setSearch] = useState<string>("");
 

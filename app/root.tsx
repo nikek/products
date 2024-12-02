@@ -8,7 +8,7 @@ import {
 import type { LinksFunction } from "@remix-run/cloudflare";
 
 import "./styles.css";
-import HeaderLogo from "./components/HeaderLogo/HeaderLogo";
+import Header from "./components/Header/Header";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://www.ui.com", crossOrigin: "anonymous" },
@@ -24,11 +24,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <header className="header">
-          <HeaderLogo />
-          <p>Devices</p>
-          <p>Niklas Ek</p>
-        </header>
+        <Header />
         {children}
         <ScrollRestoration />
         <Scripts />

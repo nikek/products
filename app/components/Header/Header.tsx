@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import classes from "./HeaderLogo.module.css";
+import classes from "./Header.module.css";
 
 const LogoSVG = () => (
   <svg
@@ -21,10 +21,14 @@ const LogoSVG = () => (
   </svg>
 );
 
-export default function HeaderLogo() {
+export default function Header() {
   return (
-    <Link to={"/"} className={classes.headerLogo}>
-      <LogoSVG />
-    </Link>
+    <header className="header">
+      <Link to={"/"} className={classes.headerLogo}>
+        <LogoSVG />
+      </Link>
+      <p>Devices</p>
+      <p>Niklas Ek</p>
+    </header>
   );
 }
