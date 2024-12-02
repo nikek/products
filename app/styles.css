@@ -30,6 +30,7 @@
   --ui-neutral-10: #50565e;
   --ui-neutral-3: #ededf0;
   --ui-neutral-2: #f4f5f6;
+  --ui-neutral-1: #f9fafa;
   --text-3: #808893;
 
   font-family: "UI Sans", sans-serif;
@@ -40,6 +41,37 @@
 
 body {
   margin: 0;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  border: none;
+  background-color: transparent;
+  padding: 6px;
+  margin: 1px;
+  border-radius: 4px;
+  min-block-size: 32px;
+  min-inline-size: 32px;
+
+  > svg {
+    display: block;
+  }
+
+  &:hover {
+    background-color: var(--ui-neutral-2);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--ui-ublue-6);
+  }
+
+  :is(&:active, .active) {
+    background-color: var(--ui-neutral-1);
+    > svg path {
+      fill: var(--ui-ublue-6);
+    }
+  }
 }
 
 .header {

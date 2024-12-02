@@ -3,6 +3,9 @@ import { useState } from "react";
 import Table from "~/components/Table/Table";
 import { flushSync } from "react-dom";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
+import ViewToggle from "~/components/ViewToggle/ViewToggle";
+import Search from "~/components/Search";
+import type { LayoutTypes } from "~/types";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,42 +16,17 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const size = 48;
-  const [isList, setIsList] = useState<boolean>(true);
+  const [layout, setLayout] = useState<LayoutTypes>("list");
   const [search, setSearch] = useState<string>("");
 
   return (
     <>
       <section>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          onChange={(e) => {
-            setSearch(e.currentTarget.value);
-          }}
-        />
-        <button
-          onClick={() => {
-            if (
-              "startViewTransition" in document &&
-              "matchMedia" in window &&
-              window.matchMedia("(prefers-reduced-motion: no-preference)")
-                .matches === true
-            ) {
-              document.startViewTransition(() => {
-                flushSync(() => {
-                  setIsList(!isList);
-                });
-              });
-            } else {
-              setIsList(!isList);
-            }
-          }}
-        >
-          Toggle
-        </button>
+        <Search setSearch={setSearch} />
+        <ViewToggle layout={layout} setLayout={setLayout} />
       </section>
-      {isList ? <Table search={search} /> : <ProductGrid search={search} />}
+      {layout === "list" && <Table search={search} />}
+      {layout === "grid" && <ProductGrid search={search} />}
     </>
   );
 }

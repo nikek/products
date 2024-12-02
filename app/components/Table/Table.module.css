@@ -12,7 +12,6 @@
 
   tr {
     height: 32px;
-    border-block-end: 1px solid var(--ui-neutral-3);
 
     @media (prefers-reduced-motion: no-preference) {
       transition-duration: 600ms;
@@ -22,21 +21,21 @@
     }
   }
 
-  td {
-    width: max-content;
+  td,
+  th {
+    min-width: 24px;
     padding-inline: 8px;
     vertical-align: middle;
+    border-block-end: 1px solid var(--ui-neutral-3);
 
-    &:has(img) {
-      font-size: 0;
+    img {
+      display: block;
     }
   }
 
   th {
     text-align: left;
-    padding-inline: 8px;
     color: black;
-    border-block-end: 1px solid var(--ui-neutral-3);
   }
 }
 .transparent {

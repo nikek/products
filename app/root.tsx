@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/cloudflare";
 
-import classes from "./styles.module.css";
+import "./styles.css";
 import HeaderLogo from "./components/HeaderLogo/HeaderLogo";
 
 export const links: LinksFunction = () => [
@@ -24,7 +24,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <header className={classes.header}>
+        <header className="header">
           <HeaderLogo />
           <p>Devices</p>
           <p>Niklas Ek</p>
