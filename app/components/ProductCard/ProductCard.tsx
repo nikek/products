@@ -21,7 +21,7 @@ nt/ui/images/${d.id}/default/${d.images.default}.png&w=${84}`}
       </figure>
       <span className={classes.label}>{d.line.name}</span>
       <p className={classes.name}>{d.product.name}</p>
-      <p className={classes.short}>{d.line.name}</p>
+      <p className={classes.short}>{d.product.abbrev}</p>
     </article>
   );
 }

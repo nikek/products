@@ -1,18 +1,14 @@
-import uidb from "../../public.json";
+import type { Product } from "~/types";
 import ProductCard from "../ProductCard/ProductCard";
 
 import classes from "./ProductGrid.module.css";
 
-export default function ProductGrid({ search }: { search: string }) {
+export default function ProductGrid({ items }: { items: Product[] }) {
   return (
     <section className={classes.grid}>
-      {uidb.devices
-        .filter((d) =>
-          d.product.name.toLowerCase().includes(search.toLowerCase())
-        )
-        .map((d, i) => (
-          <ProductCard key={d.id} i={i} d={d} />
-        ))}
+      {items.map((d, i) => (
+        <ProductCard key={d.id} i={i} d={d} />
+      ))}
     </section>
   );
 }

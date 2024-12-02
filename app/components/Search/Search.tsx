@@ -1,8 +1,21 @@
 import { flushSync } from "react-dom";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import {
+  Button,
+  ComboBox,
+  Input,
+  Label,
+  ListBox,
+  ListBoxItem,
+  Popover,
+  Text,
+} from "react-aria-components";
 import uidb from "../../public.json";
 
-const items = uidb.devices.map((d) => ({ id: d.id, name: d.product.name }));
+const items = uidb.devices.map((d) => ({
+  id: d.id,
+  name: d.product.name,
+  abbr: d.product.abbrev,
+}));
 
 import classes from "./Search.module.css";
 
@@ -29,12 +42,29 @@ export default function Search({
 }) {
   return (
     <div className={classes.searchBox}>
-      <SearchIcon />
-      <ReactSearchAutocomplete
-        items={items}
-        onSearch={setSearch}
-        showIcon={true}
-      ></ReactSearchAutocomplete>
+      <ComboBox allowsCustomValue={true} onInputChange={setSearch}>
+        <div className={classes.searchInput}>
+          <Label>
+            <span className="visually-hidden">Search</span>
+            <SearchIcon />
+          </Label>
+          <Input placeholder="Search" />
+        </div>
+        <Popover>
+          <ListBox>
+            {items.map((d, i) => (
+              <ListBoxItem
+                key={i}
+                textValue={d.name.toLocaleLowerCase()}
+                id={d.name}
+              >
+                <Text slot="label">{d.name}</Text>
+                <Text slot="description">{d.abbr}</Text>
+              </ListBoxItem>
+            ))}
+          </ListBox>
+        </Popover>
+      </ComboBox>
     </div>
   );
 }

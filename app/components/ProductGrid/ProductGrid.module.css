@@ -1,6 +1,7 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  min-width: 740px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   padding: 2rem;
   gap: 1rem;
   transition: 300ms; /* Change as needed */

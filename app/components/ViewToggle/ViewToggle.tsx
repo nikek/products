@@ -61,33 +61,17 @@ export default function ViewToggle({
   layout: LayoutTypes;
   setLayout: React.Dispatch<React.SetStateAction<LayoutTypes>>;
 }) {
-  const handleChange = (layout: LayoutTypes) => {
-    if (
-      "startViewTransition" in document &&
-      "matchMedia" in window &&
-      window.matchMedia("(prefers-reduced-motion: no-preference)").matches ===
-        true
-    ) {
-      document.startViewTransition(() => {
-        flushSync(() => {
-          setLayout(layout);
-        });
-      });
-    } else {
-      setLayout(layout);
-    }
-  };
   return (
     <div className={classes.viewToggle}>
       <button
         className={`btn${layout === "list" ? " active" : ""}`}
-        onClick={() => handleChange("list")}
+        onClick={() => setLayout("list")}
       >
         <ListIcon />
       </button>
       <button
         className={`btn${layout === "grid" ? " active" : ""}`}
-        onClick={() => handleChange("grid")}
+        onClick={() => setLayout("grid")}
       >
         <GridIcon />
       </button>

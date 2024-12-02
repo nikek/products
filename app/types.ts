@@ -6,6 +6,7 @@ export type Product = {
   };
   product: {
     name: string;
+    abbrev: string;
   };
   images: {
     default: string;

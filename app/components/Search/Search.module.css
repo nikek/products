@@ -1,28 +1,106 @@
 .searchBox {
   display: grid;
-  grid-template-columns: 0px 1fr;
-  place-content: center;
-  height: 32px;
+}
 
-  max-width: 300px;
-  margin: 1rem;
+:global(:root) {
+  --text-color: #000000;
+  --field-background: var(--ui-neutral-2);
+  --field-text-color: black;
+  --border-color: transparent;
+  --focus-ring-color: var(--ui-ublue-6);
+  --highlight-background: var(--ui-neutral-3);
+  --highlight-foreground: #50565e;
+}
 
-  div + div {
-    background: none;
-  }
+:global(.react-aria-ComboBox) {
+  color: var(--text-color);
+  position: relative;
 
-  input {
+  :global(.react-aria-Input) {
+    width: 320px;
     height: 32px;
-    background-color: var(--ui-neutral-2);
-    border-radius: 4px;
-    border: 1px solid transparent;
-  }
 
-  svg {
-    opacity: 0;
+    background: var(--field-background);
+    color: var(--field-text-color);
+    border: none;
+    border-radius: 4px;
+
+    padding-inline-start: 2.5rem;
+    vertical-align: middle;
+
+    &[data-focused] {
+      outline: none;
+      outline: 1px solid var(--focus-ring-color);
+      outline-offset: -1px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: var(--ui-neutral-3);
+    }
+
+    &::placeholder {
+      font-family: "UI Sans";
+      color: rgba(0 0 0 / 45%);
+    }
+  }
+  :global(.react-aria-Label) {
+    position: absolute;
+    inset-block-start: 10px;
+    inset-inline-start: 12px;
   }
 }
 
-.searchIcon {
-  z-index: 111;
+:global(.react-aria-Popover[data-trigger="ComboBox"]) {
+  width: var(--trigger-width);
+  margin-block-start: -8px;
+
+  :global(.react-aria-ListBox) {
+    display: block;
+    width: unset;
+    max-height: inherit;
+    min-height: unset;
+    border: none;
+    overflow: hidden;
+
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px -10px rgba(0 0 0 / 45%);
+
+    :global(.react-aria-ListBoxItem) {
+      padding-left: 8px;
+      height: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    :first-child {
+      border-start-start-radius: 8px;
+      border-start-end-radius: 8px;
+    }
+    :last-child {
+      border-end-start-radius: 8px;
+      border-end-end-radius: 8px;
+    }
+  }
+
+  :global(.react-aria-ListBoxItem) {
+    padding: 0.286rem 0.571rem 0.286rem 1.571rem;
+
+    &[data-focus-visible] {
+      outline: none;
+    }
+
+    &[data-selected] {
+      border: 1px solid var(--ui-ublue-6);
+    }
+
+    &[data-focused],
+    &[data-pressed] {
+      background: var(--highlight-background);
+      color: var(--highlight-foreground);
+    }
+  }
 }

@@ -43,6 +43,22 @@ body {
   margin: 0;
 }
 
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+::view-transition-group(disabled),
+::view-transition-old(disabled),
+::view-transition-new(disabled) {
+  animation-duration: 0s !important;
+}
+
 .btn {
   display: grid;
   place-items: center;
@@ -51,7 +67,7 @@ body {
   padding: 6px;
   margin: 1px;
   border-radius: 4px;
-  min-block-size: 32px;
+  block-size: 32px;
   min-inline-size: 32px;
 
   > svg {
@@ -64,9 +80,11 @@ body {
 
   &:focus-visible {
     outline: 1px solid var(--ui-ublue-6);
+    background-color: var(--ui-neutral-2);
   }
 
-  :is(&:active, .active) {
+  &:active,
+  &.active {
     background-color: var(--ui-neutral-1);
     > svg path {
       fill: var(--ui-ublue-6);

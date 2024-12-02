@@ -1,10 +1,13 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "~/components/Table/Table";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
 import Search from "~/components/Search/Search";
-import type { LayoutTypes } from "~/types";
+import type { LayoutTypes, Product } from "~/types";
+
+import uidb from "../public.json";
+import { flushSync } from "react-dom";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,16 +18,51 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const [layout, setLayout] = useState<LayoutTypes>("list");
+  const [layoutUsed, setLayoutUsed] = useState<LayoutTypes>("list");
+
   const [search, setSearch] = useState<string>("");
+  const [items, setItems] = useState<Product[]>(uidb.devices);
+
+  useEffect(() => {
+    const subset = uidb.devices.filter((d) =>
+      d.product.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setItems(subset);
+  }, [search]);
+
+  useEffect(() => {
+    if (
+      "startViewTransition" in document &&
+      "matchMedia" in window &&
+      window.matchMedia("(prefers-reduced-motion: no-preference)").matches ===
+        true
+    ) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          setLayoutUsed(layout);
+        });
+      });
+    } else {
+      setLayoutUsed(layout);
+    }
+  }, [layout]);
 
   return (
     <>
-      <section>
-        <Search setSearch={setSearch} />
-        <ViewToggle layout={layout} setLayout={setLayout} />
+      <section
+        style={{
+          marginInline: 32,
+          display: "flex",
+          marginBlock: "1rem",
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Search setSearch={setSearch} />
+        </div>
+        <ViewToggle layout={layoutUsed} setLayout={setLayout} />
       </section>
-      {layout === "list" && <Table search={search} />}
-      {layout === "grid" && <ProductGrid search={search} />}
+      {layoutUsed === "list" && <Table items={items} />}
+      {layoutUsed === "grid" && <ProductGrid items={items} />}
     </>
   );
 }

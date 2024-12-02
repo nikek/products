@@ -2,8 +2,9 @@ import classes from "./Table.module.css";
 import uidb from "../../public.json";
 import { useEffect, useState } from "react";
 import { Link } from "@remix-run/react";
+import type { Product } from "~/types";
 
-export default function Table({ search }: { search: string }) {
+export default function Table({ items }: { items: Product[] }) {
   const [done, setDone] = useState<boolean>(false);
 
   useEffect(() => {
@@ -25,40 +26,36 @@ export default function Table({ search }: { search: string }) {
           </tr>
         </thead>
         <tbody>
-          {uidb.devices
-            .filter((d) =>
-              d.product.name.toLowerCase().includes(search.toLowerCase())
-            )
-            .map((d, i) => (
-              <tr
-                key={d.id}
-                className={done ? "" : classes.transparent}
-                style={
-                  {
-                    "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
-                  } as React.CSSProperties
-                }
-                onClick={(e) => {
-                  console.log(e);
-                  (e.target as HTMLElement).querySelector("a")!.click();
-                }}
-              >
-                <td>
-                  <Link to={`products/${d.id}`} className={classes.link}></Link>
-                  <img
-                    src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerpri
+          {items.map((d, i) => (
+            <tr
+              key={d.id}
+              className={done ? "" : classes.transparent}
+              style={
+                {
+                  "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
+                } as React.CSSProperties
+              }
+              onClick={(e) => {
+                console.log(e);
+                (e.target as HTMLElement).querySelector("a")!.click();
+              }}
+            >
+              <td>
+                <Link to={`products/${d.id}`} className={classes.link}></Link>
+                <img
+                  src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerpri
 nt/ui/images/${d.id}/default/${d.images.default}.png&w=${24}`}
-                    alt=""
-                    width={24}
-                    style={{
-                      viewTransitionName: i < 30 ? "img" + d.id : "initial",
-                    }}
-                  />
-                </td>
-                <td>{d.line.name}</td>
-                <td>{d.product.name}</td>
-              </tr>
-            ))}
+                  alt=""
+                  width={24}
+                  style={{
+                    viewTransitionName: i < 30 ? "img" + d.id : "initial",
+                  }}
+                />
+              </td>
+              <td>{d.line.name}</td>
+              <td>{d.product.name}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
