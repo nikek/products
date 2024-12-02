@@ -1,0 +1,28 @@
+.searchBox {
+  display: grid;
+  grid-template-columns: 0px 1fr;
+  place-content: center;
+  height: 32px;
+
+  max-width: 300px;
+  margin: 1rem;
+
+  div + div {
+    background: none;
+  }
+
+  input {
+    height: 32px;
+    background-color: var(--ui-neutral-2);
+    border-radius: 4px;
+    border: 1px solid transparent;
+  }
+
+  svg {
+    opacity: 0;
+  }
+}
+
+.searchIcon {
+  z-index: 111;
+}

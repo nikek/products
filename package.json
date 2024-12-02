@@ -18,7 +18,8 @@
     "@remix-run/server-runtime": "^2.15.0",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-search-autocomplete": "^8.5.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241022.0",
