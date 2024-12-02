@@ -6,15 +6,6 @@
   transition: 300ms; /* Change as needed */
 }
 
-.card {
-  transition: 300ms; /* Change as needed */
-
-  transition-duration: 600ms;
-  transition-timing-function: cubic-bezier(0.1, 0.77, 0.01, 1);
-  transition-property: opacity translate;
-  transition-delay: var(--delay, 0);
-}
-
 .transparent {
   opacity: 0;
   translate: 10px;
