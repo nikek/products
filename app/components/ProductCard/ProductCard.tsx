@@ -16,6 +16,7 @@ export default function ProductCard({ d, i }: { d: Product; i: number }) {
           src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerpri
 nt/ui/images/${d.id}/default/${d.images.default}.png&w=${84}`}
           alt=""
+          loading="lazy"
           style={{ viewTransitionName: i < 30 ? "img" + d.id : "initial" }}
         />
       </figure>

@@ -17,7 +17,8 @@
   position: relative;
 
   :global(.react-aria-Input) {
-    width: 320px;
+    box-sizing: border-box;
+    width: clamp(160px, 100%, 320px);
     height: 32px;
 
     background: var(--field-background);

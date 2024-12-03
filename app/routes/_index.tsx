@@ -67,6 +67,7 @@ export default function Index() {
         style={{
           marginInline: 32,
           display: "flex",
+          gap: "8px",
           marginBlock: "1rem",
         }}
       >

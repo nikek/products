@@ -51,6 +51,7 @@ export default function Table({ items }: { items: Product[] }) {
 nt/ui/images/${d.id}/default/${d.images.default}.png&w=${24}`}
                   alt=""
                   width={24}
+                  loading="lazy"
                   style={{
                     viewTransitionName: i < 30 ? "img" + d.id : "initial",
                   }}
