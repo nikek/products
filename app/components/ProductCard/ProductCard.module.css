@@ -4,8 +4,6 @@
   border-radius: 8px;
   border: 1px solid var(--ui-neutral-3);
 
-  transition: 300ms; /* Change as needed */
-
   transition-duration: 600ms;
   transition-timing-function: cubic-bezier(0.1, 0.77, 0.01, 1);
   transition-property: opacity translate;

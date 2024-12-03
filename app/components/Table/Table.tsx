@@ -9,7 +9,7 @@ export default function Table({ items }: { items: Product[] }) {
 
   useEffect(() => {
     setDone(true);
-  });
+  }, []);
   return (
     <div className={classes.tableWrapper}>
       <table className={classes.myTable}>
@@ -35,10 +35,6 @@ export default function Table({ items }: { items: Product[] }) {
                   "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
                 } as React.CSSProperties
               }
-              onClick={(e) => {
-                console.log(e);
-                (e.target as HTMLElement).querySelector("a")!.click();
-              }}
             >
               <td>
                 <Link
@@ -47,8 +43,9 @@ export default function Table({ items }: { items: Product[] }) {
                   viewTransition
                 ></Link>
                 <img
-                  src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerpri
-nt/ui/images/${d.id}/default/${d.images.default}.png&w=${24}`}
+                  src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerprint/ui/images/${
+                    d.id
+                  }/default/${d.images.default}.png&w=${24}`}
                   alt=""
                   width={24}
                   loading="lazy"
