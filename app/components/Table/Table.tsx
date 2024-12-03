@@ -41,7 +41,11 @@ export default function Table({ items }: { items: Product[] }) {
               }}
             >
               <td>
-                <Link to={`products/${d.id}`} className={classes.link}></Link>
+                <Link
+                  to={`devices/${d.id}`}
+                  className={classes.link}
+                  viewTransition
+                ></Link>
                 <img
                   src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerpri
 nt/ui/images/${d.id}/default/${d.images.default}.png&w=${24}`}

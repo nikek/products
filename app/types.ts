@@ -1,4 +1,4 @@
-export type LayoutTypes = "list" | "grid";
+export type ViewTypes = "list" | "grid";
 export type Product = {
   id: string;
   line: {

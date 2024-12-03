@@ -4,10 +4,23 @@ import Table from "~/components/Table/Table";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
 import Search from "~/components/Search/Search";
-import type { LayoutTypes, Product } from "~/types";
+import type { ViewTypes, Product } from "~/types";
 
 import uidb from "../public.json";
 import { flushSync } from "react-dom";
+import { useSearchParams } from "@remix-run/react";
+
+type SearchParams = {
+  view: "grid" | "list";
+};
+
+function getTypedSearchParam<T extends keyof SearchParams>(
+  searchParams: URLSearchParams,
+  key: T,
+  defaultValue: SearchParams[T]
+): SearchParams[T] {
+  return (searchParams.get(key) as SearchParams[T]) ?? defaultValue;
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,8 +30,9 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const [layout, setLayout] = useState<LayoutTypes>("list");
-  const [layoutUsed, setLayoutUsed] = useState<LayoutTypes>("list");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamView = getTypedSearchParam(searchParams, "view", "list");
+  const [view, setView] = useState<ViewTypes>(searchParamView);
 
   const [search, setSearch] = useState<string>("");
   const [items, setItems] = useState<Product[]>(uidb.devices);
@@ -39,13 +53,13 @@ export default function Index() {
     ) {
       document.startViewTransition(() => {
         flushSync(() => {
-          setLayoutUsed(layout);
+          setView(searchParamView);
         });
       });
     } else {
-      setLayoutUsed(layout);
+      setView(searchParamView);
     }
-  }, [layout]);
+  }, [searchParams.get("view")]);
 
   return (
     <>
@@ -59,10 +73,15 @@ export default function Index() {
         <div style={{ flex: 1 }}>
           <Search setSearch={setSearch} />
         </div>
-        <ViewToggle layout={layoutUsed} setLayout={setLayout} />
+        <ViewToggle
+          view={view}
+          setView={(view: string) =>
+            setSearchParams(new URLSearchParams({ view }))
+          }
+        />
       </section>
-      {layoutUsed === "list" && <Table items={items} />}
-      {layoutUsed === "grid" && <ProductGrid items={items} />}
+      {view === "list" && <Table items={items} />}
+      {view === "grid" && <ProductGrid items={items} />}
     </>
   );
 }

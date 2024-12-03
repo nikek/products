@@ -53,15 +53,10 @@ body {
   width: 1px;
 }
 
-::view-transition-group(disabled),
-::view-transition-old(disabled),
-::view-transition-new(disabled) {
-  animation-duration: 0s !important;
-}
-
 .btn {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   background-color: transparent;
   padding: 6px;
@@ -90,6 +85,13 @@ body {
       fill: var(--ui-ublue-6);
     }
   }
+}
+a.btn {
+  padding: 0;
+}
+
+.big-btn-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0 0 0 / 0.45);
 }
 
 .header {

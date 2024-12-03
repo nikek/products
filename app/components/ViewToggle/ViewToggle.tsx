@@ -1,6 +1,6 @@
 import { flushSync } from "react-dom";
 import classes from "./ViewToggle.module.css";
-import type { LayoutTypes } from "~/types";
+import type { ViewTypes } from "~/types";
 
 const ListIcon = () => (
   <svg
@@ -55,23 +55,23 @@ const GridIcon = () => (
 );
 
 export default function ViewToggle({
-  layout,
-  setLayout,
+  view,
+  setView,
 }: {
-  layout: LayoutTypes;
-  setLayout: React.Dispatch<React.SetStateAction<LayoutTypes>>;
+  view: ViewTypes;
+  setView: (a: string) => void;
 }) {
   return (
     <div className={classes.viewToggle}>
       <button
-        className={`btn${layout === "list" ? " active" : ""}`}
-        onClick={() => setLayout("list")}
+        className={`btn${view === "list" ? " active" : ""}`}
+        onClick={() => setView("list")}
       >
         <ListIcon />
       </button>
       <button
-        className={`btn${layout === "grid" ? " active" : ""}`}
-        onClick={() => setLayout("grid")}
+        className={`btn${view === "grid" ? " active" : ""}`}
+        onClick={() => setView("grid")}
       >
         <GridIcon />
       </button>
