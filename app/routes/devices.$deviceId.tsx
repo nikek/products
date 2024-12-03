@@ -20,9 +20,9 @@ export const loader = async ({
     throw new Response("No device found", { status: 404 });
 
   return {
-    current: uidb.devices[deviceIndex],
-    prev: uidb.devices[deviceIndex - 1],
-    next: uidb.devices[deviceIndex + 1],
+    current: uidb.devices[deviceIndex] as Product,
+    prev: uidb.devices[deviceIndex - 1] as Product | undefined,
+    next: uidb.devices[deviceIndex + 1] as Product | undefined,
   };
 };
 
@@ -73,7 +73,6 @@ export default function devices() {
         ) : null}
       </nav>
       <Device device={current} />
-      {current.product.name}
     </main>
   );
 }

@@ -14,7 +14,7 @@ export default function Table({ items }: { items: Product[] }) {
     <div className={classes.tableWrapper}>
       <table className={classes.myTable}>
         <colgroup>
-          <col style={{ width: "max-content" }} />
+          <col style={{ width: "40px" }} />
           <col style={{ width: "50%" }} />
           <col style={{ width: "50%" }} />
         </colgroup>
@@ -35,6 +35,25 @@ export default function Table({ items }: { items: Product[] }) {
                   "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
                 } as React.CSSProperties
               }
+              onMouseEnter={(e) => {
+                // Preload image if we hover over it for more than 100ms
+                const timer = setTimeout(() => {
+                  let img = new Image();
+                  img.src = `https://images.svc.ui.com/?u=https://static.ui.com/fingerprint/ui/images/${
+                    d.id
+                  }/default/${d.images.default}.png&w=${280}`;
+                }, 150);
+
+                const img = e.currentTarget.querySelector("img");
+                if (img) {
+                  img.style.viewTransitionName = "img" + d.id;
+                }
+
+                const cleanup = () => clearTimeout(timer);
+                e.currentTarget.addEventListener("mouseleave", cleanup, {
+                  once: true,
+                });
+              }}
             >
               <td>
                 <Link
@@ -43,6 +62,7 @@ export default function Table({ items }: { items: Product[] }) {
                   viewTransition
                 ></Link>
                 <img
+                  id={`img${d.id}`}
                   src={`https://images.svc.ui.com/?u=https://static.ui.com/fingerprint/ui/images/${
                     d.id
                   }/default/${d.images.default}.png&w=${24}`}

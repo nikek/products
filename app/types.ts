@@ -1,8 +1,9 @@
 export type ViewTypes = "list" | "grid";
-export type Product = {
+export interface Product {
   id: string;
   line: {
     name: string;
+    id: string;
   };
   product: {
     name: string;
@@ -11,4 +12,18 @@ export type Product = {
   images: {
     default: string;
   };
-};
+  unifi?: {
+    network?: {
+      numberOfPorts?: number;
+      radios?: {
+        [key: string]:
+          | {
+              gain?: number;
+              maxPower?: number;
+              maxSpeedMegabitsPerSecond?: number;
+            }
+          | undefined;
+      };
+    };
+  };
+}
