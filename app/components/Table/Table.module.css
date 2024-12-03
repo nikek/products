@@ -24,7 +24,7 @@
       transition-property: opacity, translate;
       transition-delay: var(--delay, 0);
     }
-    &:hover {
+    &:not(:has(th)):hover {
       background-color: var(--ui-neutral-2);
     }
 

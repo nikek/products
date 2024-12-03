@@ -11,13 +11,11 @@ import {
 } from "react-aria-components";
 import uidb from "../../public.json";
 
-const items = uidb.devices.map((d) => ({
-  id: d.id,
-  name: d.product.name,
-  abbr: d.product.abbrev,
-}));
+const items = uidb.devices;
 
 import classes from "./Search.module.css";
+import { useState } from "react";
+import type { Product } from "~/types";
 
 const SearchIcon = () => (
   <svg
@@ -35,14 +33,41 @@ const SearchIcon = () => (
   </svg>
 );
 
+const regex = (substring: string) => new RegExp(`(${substring})`, "gi");
+
+function formatText(str: string, substring: string) {
+  if (!substring) return str;
+  return str.replace(regex(substring), "<mark>$1</mark>");
+}
+
 export default function Search({
   setSearch,
 }: {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filterItems = (items: Product[], searchTerm: string) => {
+    if (!searchTerm) return items;
+    const searchRegex = regex(searchTerm);
+    return items.filter(
+      (item) =>
+        searchRegex.test(item.product.name) ||
+        searchRegex.test(item.product.abbrev)
+    );
+  };
+
+  const filteredItems = filterItems(items, searchTerm);
+
   return (
     <div className={classes.searchBox}>
-      <ComboBox allowsCustomValue={true} onInputChange={setSearch}>
+      <ComboBox
+        allowsCustomValue={true}
+        onInputChange={(value) => {
+          setSearch(value);
+          setSearchTerm(value);
+        }}
+      >
         <div className={classes.searchInput}>
           <Label>
             <span className="visually-hidden">Search</span>
@@ -52,14 +77,23 @@ export default function Search({
         </div>
         <Popover>
           <ListBox>
-            {items.map((d, i) => (
+            {filteredItems.map((d, i) => (
               <ListBoxItem
                 key={i}
-                textValue={d.name.toLocaleLowerCase()}
-                id={d.name}
+                textValue={d.product.name.toLocaleLowerCase()}
               >
-                <Text slot="label">{d.name}</Text>
-                <Text slot="description">{d.abbr}</Text>
+                <Text
+                  slot="label"
+                  dangerouslySetInnerHTML={{
+                    __html: formatText(d.product.name, searchTerm),
+                  }}
+                />
+                <Text
+                  slot="description"
+                  dangerouslySetInnerHTML={{
+                    __html: formatText(d.product.abbrev, searchTerm),
+                  }}
+                />
               </ListBoxItem>
             ))}
           </ListBox>

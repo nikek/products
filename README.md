@@ -46,19 +46,26 @@ This project uses CSS modules to scope styles.
 
 ## Todo
 
-- [] Fonts
-- [] Test main flows
+- [x] Fonts
+- [ ] Test main flows
 - [x] Header
   - [x] HeaderLogo with hover and focus effects
 - [ ] Action bar
-  - [ ] String search
+  - [x] String search
+    - [x] Search as you type
+    - [x] Custom filter
+    - [x] Highlight search term
   - [ ] Filter on product line using multiselect popover
   - [x] Toggle views (extra: using transitions)
-- [ ] Table view
-- [ ] Grid view
+- [x] Table view
+- [x] Grid view
 - [ ] Single product page
+  - [ ] 404 page
 
 ## Highlights
 
 - Stagger animation on table rows entering
 - View transition when switching to grid view
+- View transition to single product page
+- Respect reduced motion preferences
+- Clickable table row

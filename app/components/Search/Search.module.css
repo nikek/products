@@ -103,5 +103,11 @@
       background: var(--highlight-background);
       color: var(--highlight-foreground);
     }
+
+    mark {
+      font-weight: bold;
+      text-decoration: underline;
+      background-color: transparent;
+    }
   }
 }

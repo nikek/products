@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import Table from "~/components/Table/Table";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
