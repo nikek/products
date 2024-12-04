@@ -1,0 +1,112 @@
+.lineFilter {
+  display: grid;
+  gap: 8px;
+
+  border: none;
+  padding: 16px;
+
+  height: 270px;
+
+  h2 {
+    margin-block: 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgba(0 0 0 / 65%);
+    overflow-y: auto;
+
+    li {
+      margin-block: 4px 0;
+    }
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--ui-neutral-8);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked {
+    background: var(--ui-ublue-6);
+    border-color: var(--ui-ublue-6);
+  }
+
+  input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: checkmark 0.2s ease-in-out;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+:global(.react-aria-Popover) {
+  box-shadow: 0 16px 32px rgb(28 30 45 / 20%);
+  border-radius: 8px;
+  background: white;
+
+  > div {
+    &:focus,
+    &:focus-visible {
+      outline: none !important;
+    }
+  }
+  max-width: 250px;
+
+  &[data-placement="bottom"] {
+    --origin: translateY(-8px);
+  }
+
+  &[data-entering] {
+    animation: popover-slide 200ms;
+  }
+
+  &[data-exiting] {
+    animation: popover-slide 200ms reverse ease-in;
+  }
+}
+
+@keyframes popover-slide {
+  from {
+    transform: var(--origin);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

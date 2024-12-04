@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Table from "~/components/Table/Table";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
@@ -7,20 +7,18 @@ import Search from "~/components/Search/Search";
 import type { ViewTypes, Product } from "~/types";
 
 import uidb from "../public.json";
+import Filter from "~/components/Filter/Filter";
 import { flushSync } from "react-dom";
 import { useSearchParams } from "@remix-run/react";
 
-type SearchParams = {
-  view: "grid" | "list";
-};
-
-function getTypedSearchParam<T extends keyof SearchParams>(
-  searchParams: URLSearchParams,
-  key: T,
-  defaultValue: SearchParams[T]
-): SearchParams[T] {
-  return (searchParams.get(key) as SearchParams[T]) ?? defaultValue;
-}
+const lines = Array.from(
+  uidb.devices
+    .reduce((map, d) => {
+      map.set(d.line.id, { id: d.line.id, name: d.line.name });
+      return map;
+    }, new Map())
+    .values()
+);
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,20 +29,25 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchParamView = getTypedSearchParam(searchParams, "view", "list");
+  const searchParamView =
+    (searchParams.get("view") as "grid" | "list") ?? "list"; // get type safe view param or default to list
   const [view, setView] = useState<ViewTypes>(searchParamView);
 
   const [search, setSearch] = useState<string>("");
+  const [filter, setFilter] = useState<string[]>([]);
   const [items, setItems] = useState<Product[]>(uidb.devices);
 
   useEffect(() => {
-    const subset = uidb.devices.filter((d) =>
-      d.product.name.toLowerCase().includes(search.toLowerCase())
+    const subset = uidb.devices.filter(
+      (d) =>
+        d.product.name.toLowerCase().includes(search.toLowerCase()) &&
+        (filter.length === 0 || filter.includes(d.line.id))
     );
     setItems(subset);
-  }, [search]);
+  }, [search, filter]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (view === searchParamView) return;
     if (
       "startViewTransition" in document &&
       "matchMedia" in window &&
@@ -80,6 +83,7 @@ export default function Index() {
             setSearchParams(new URLSearchParams({ view }))
           }
         />
+        <Filter lines={lines} setFilter={setFilter} />
       </section>
       {view === "list" && <Table items={items} />}
       {view === "grid" && <ProductGrid items={items} />}

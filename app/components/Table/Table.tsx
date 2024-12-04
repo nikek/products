@@ -5,11 +5,6 @@ import { Link } from "@remix-run/react";
 import type { Product } from "~/types";
 
 export default function Table({ items }: { items: Product[] }) {
-  const [done, setDone] = useState<boolean>(false);
-
-  useEffect(() => {
-    setDone(true);
-  }, []);
   return (
     <div className={classes.tableWrapper}>
       <table className={classes.myTable}>
@@ -29,7 +24,6 @@ export default function Table({ items }: { items: Product[] }) {
           {items.map((d, i) => (
             <tr
               key={d.id}
-              className={done ? "" : classes.transparent}
               style={
                 {
                   "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
