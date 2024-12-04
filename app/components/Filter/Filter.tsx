@@ -37,6 +37,7 @@ export default function Filter({
             action="#"
             onSubmit={(e) => e.preventDefault()}
             onChange={handleChange}
+            onReset={handleReset}
           >
             <fieldset className={classes.lineFilter}>
               <h2>Product Line</h2>
@@ -57,7 +58,7 @@ export default function Filter({
               <button
                 className="btn btn-danger"
                 disabled={!selected.length}
-                onClick={handleReset}
+                type="reset"
               >
                 Reset
               </button>
