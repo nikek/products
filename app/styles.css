@@ -100,6 +100,17 @@ body {
   &[disabled] {
     color: var(--ui-red-3);
   }
+
+  &:focus-visible {
+    outline: 1px solid var(--ui-red-6);
+  }
+
+  &:active,
+  &.active,
+  &[data-pressed],
+  &[data-selected] {
+    color: var(--ui-red-3);
+  }
 }
 a.btn {
   padding: 0;

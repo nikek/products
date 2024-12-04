@@ -27,9 +27,16 @@
   }
 
   label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    border-radius: 4px;
+    margin-inline: 2px;
+    padding-inline-end: 4px;
+
+    &:focus-within {
+      outline: 1px solid var(--ui-ublue-6);
+    }
   }
 
   input[type="checkbox"] {
@@ -60,6 +67,10 @@
     background-repeat: no-repeat;
     background-position: center;
     animation: checkmark 0.2s ease-in-out;
+  }
+
+  input[type="checkbox"]:focus {
+    outline: none;
   }
 }
 
