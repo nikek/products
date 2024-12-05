@@ -16,8 +16,7 @@ export default function Device({ device }: { device: Product }) {
             device.id
           }/default/${device.images.default}.png&w=${280}`}
           alt=""
-          loading="lazy"
-          style={{ viewTransitionName: "img" + device.id }}
+          style={{ viewTransitionName: "img" + device.id, aspectRatio: "1/1" }}
         />
       </figure>
       <div>
