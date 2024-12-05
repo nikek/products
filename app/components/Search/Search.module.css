@@ -1,5 +1,5 @@
 .searchBox {
-  display: grid;
+  width: clamp(160px, 100%, 320px);
 }
 
 :global(:root) {
@@ -18,7 +18,7 @@
 
   :global(.react-aria-Input) {
     box-sizing: border-box;
-    width: clamp(160px, 100%, 320px);
+    width: 100%;
     height: 32px;
 
     background: var(--field-background);

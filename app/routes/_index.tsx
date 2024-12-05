@@ -74,8 +74,13 @@ export default function Index() {
           marginBlock: "1rem",
         }}
       >
-        <div style={{ flex: 1 }}>
+        <div
+          style={{ flex: 1, display: "flex", gap: "8px", alignItems: "center" }}
+        >
           <Search setSearch={setSearch} />
+          <small style={{ width: "max-content", whiteSpace: "nowrap" }}>
+            {items.length} devices
+          </small>
         </div>
         <ViewToggle
           view={view}
