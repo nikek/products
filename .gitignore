@@ -1,6 +1,11 @@
 node_modules
+.DS_Store
 
 /.wrangler
 /build
 .env
 .dev.vars
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

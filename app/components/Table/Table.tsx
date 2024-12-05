@@ -24,11 +24,11 @@ export default function Table({ items }: { items: Product[] }) {
           {items.map((d, i) => (
             <tr
               key={d.id}
-              style={
-                {
-                  "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
-                } as React.CSSProperties
-              }
+              // style={
+              //   {
+              //     "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
+              //   } as React.CSSProperties
+              // }
               onMouseEnter={(e) => {
                 // Preload image if we hover over it for more than 100ms
                 const timer = setTimeout(() => {

@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogTrigger, Popover } from "react-aria-components";
 import classes from "./Filter.module.css";
 import { useEffect, useState } from "react";
+
 type FilterProps = { id: string; name: string }[];
 
 export default function Filter({
@@ -12,58 +13,51 @@ export default function Filter({
 }) {
   const [selected, setSelected] = useState<string[]>([]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    setSelected(
-      Array.from(event.target.form.elements)
-        .filter((e) => (e as HTMLInputElement).checked)
-        .map((e) => (e as HTMLInputElement).value)
+  // Single function to handle both checkbox changes and form reset
+  const handleSelection = (value?: string[]) => {
+    const newSelection = value ?? [];
+    setSelected(newSelection);
+    setFilter(newSelection);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    handleSelection(
+      e.target.checked
+        ? [...selected, value]
+        : selected.filter((id) => id !== value)
     );
   };
-
-  const handleReset = () => {
-    setSelected([]);
-  };
-
-  useEffect(() => {
-    setFilter(selected);
-  }, [selected]);
 
   return (
     <DialogTrigger>
       <Button className="btn">Filter</Button>
       <Popover>
-        <Dialog>
-          <form
-            action="#"
-            onSubmit={(e) => e.preventDefault()}
-            onChange={handleChange}
-            onReset={handleReset}
+        <Dialog className={classes.lineFilter}>
+          <h2>Product Line</h2>
+          <ol>
+            {lines.map((line) => (
+              <li key={line.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selected.includes(line.id)}
+                    value={line.id}
+                    onChange={handleCheckboxChange}
+                  />
+                  {line.name}
+                </label>
+              </li>
+            ))}
+          </ol>
+          <button
+            className="btn btn-danger"
+            disabled={!selected.length}
+            onClick={() => handleSelection()}
+            type="button"
           >
-            <fieldset className={classes.lineFilter}>
-              <h2>Product Line</h2>
-              <ol>
-                {lines.map((line) => (
-                  <li key={line.id}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selected.includes(line.id)}
-                        value={line.id}
-                      />
-                      {line.name}
-                    </label>
-                  </li>
-                ))}
-              </ol>
-              <button
-                className="btn btn-danger"
-                disabled={!selected.length}
-                type="reset"
-              >
-                Reset
-              </button>
-            </fieldset>
-          </form>
+            Reset
+          </button>
         </Dialog>
       </Popover>
     </DialogTrigger>

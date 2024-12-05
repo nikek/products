@@ -4,14 +4,7 @@ import { Link } from "@remix-run/react";
 
 export default function ProductCard({ d, i }: { d: Product; i: number }) {
   return (
-    <article
-      className={classes.card}
-      style={
-        {
-          "--delay": `${i * 20 > 1000 ? 1000 : i * 20}ms`,
-        } as React.CSSProperties
-      }
-    >
+    <article className={classes.card}>
       <Link to={`/devices/${d.id}`} className={classes.cardLink} viewTransition>
         <figure>
           <img

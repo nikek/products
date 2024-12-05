@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "~/components/Table/Table";
 import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
@@ -46,7 +46,7 @@ export default function Index() {
     setItems(subset);
   }, [search, filter]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (view === searchParamView) return;
     if (
       "startViewTransition" in document &&
