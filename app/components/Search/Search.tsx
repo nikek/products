@@ -60,7 +60,7 @@ export default function Search({
   return (
     <div className={classes.searchBox}>
       <ComboBox
-        allowsCustomValue={true}
+        allowsCustomValue={true} // To search for sub-strings not matching any exact item
         onInputChange={(value) => {
           setSearch(value);
           setSearchTerm(value);

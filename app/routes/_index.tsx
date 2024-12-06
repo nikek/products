@@ -8,8 +8,9 @@ import uidb from "../public.json";
 import Filter from "~/components/Filter/Filter";
 import { flushSync } from "react-dom";
 import { useSearchParams } from "@remix-run/react";
-import ProductList from "~/components/DeviceList/DeviceList";
+import DeviceList from "~/components/DeviceList/DeviceList";
 
+// Extract unique product lines for filter dropdown
 const lines = Array.from(
   uidb.devices
     .reduce((map, d) => {
@@ -26,6 +27,10 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+/**
+ * Main application page that displays the device catalog.
+ * Handles search, filtering, and view switching functionality.
+ */
 export default function Index() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamView =
@@ -45,13 +50,12 @@ export default function Index() {
     setItems(subset);
   }, [search, filter]);
 
+  // Handle view transitions with fallback
   useEffect(() => {
     if (view === searchParamView) return;
     if (
       "startViewTransition" in document &&
-      "matchMedia" in window &&
-      window.matchMedia("(prefers-reduced-motion: no-preference)").matches ===
-        true
+      window.matchMedia("(prefers-reduced-motion: no-preference)").matches
     ) {
       document.startViewTransition(() => {
         flushSync(() => {
@@ -66,15 +70,7 @@ export default function Index() {
   return (
     <>
       <section className="controls">
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            gap: "8px",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="controls-search">
           <Search setSearch={setSearch} />
           <small style={{ width: "max-content", whiteSpace: "nowrap" }}>
             {items.length} devices
@@ -88,7 +84,7 @@ export default function Index() {
         />
         <Filter lines={lines} setFilter={setFilter} />
       </section>
-      <ProductList items={items} layout={view} />
+      <DeviceList items={items} layout={view} />
     </>
   );
 }

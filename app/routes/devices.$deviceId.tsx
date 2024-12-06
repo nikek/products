@@ -1,6 +1,6 @@
 import invariant from "tiny-invariant";
 import uidb from "../public.json";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import type { LoaderFunctionArgs } from "@remix-run/server-runtime";
 import Device from "~/components/DeviceSingle/DeviceSingle";
 import type { Product } from "~/types";
@@ -44,12 +44,21 @@ const LeftCaret = ({ style }: { style?: React.CSSProperties }) => (
 
 export default function devices() {
   const { current, prev, next } = useLoaderData<typeof loader>();
+  const [searchParams] = useSearchParams();
 
   return (
     <main>
       <nav style={{ margin: "1rem", display: "flex", gap: "4px" }}>
         <div style={{ flex: 1, justifyItems: "flex-start" }}>
-          <Link className="btn big-btn-shadow btn-back" to="/">
+          <Link
+            className="btn big-btn-shadow btn-back"
+            to={`/${searchParams.get("view") === "grid" ? "?view=grid" : ""}`}
+            viewTransition={
+              typeof window !== "undefined" &&
+              window.matchMedia("(prefers-reduced-motion: no-preference)")
+                .matches
+            }
+          >
             <LeftCaret /> Back
           </Link>
         </div>

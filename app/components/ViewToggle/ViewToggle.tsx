@@ -1,4 +1,3 @@
-import { flushSync } from "react-dom";
 import classes from "./ViewToggle.module.css";
 import type { ViewTypes } from "~/types";
 

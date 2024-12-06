@@ -158,6 +158,13 @@ a.btn-back {
     margin-inline: 16px;
   }
 }
+.controls-search {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 /* 404 */
 .not-found {

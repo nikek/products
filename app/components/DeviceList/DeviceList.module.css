@@ -163,6 +163,10 @@
     .short {
       font-size: 12px;
     }
+
+    @media (max-width: 430px) {
+      max-width: 100%;
+    }
   }
 
   .cardLink {
