@@ -158,3 +158,41 @@ a.btn-back {
     margin-inline: 16px;
   }
 }
+
+/* 404 */
+.not-found {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  translate: 0 -50px;
+  min-height: calc(100vh - 50px);
+  padding: 2rem;
+  text-align: center;
+}
+
+.not-found h1 {
+  font-size: 6rem;
+  margin: 0;
+  color: var(--ui-ublue-6);
+}
+
+.not-found h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--ui-neutral-8);
+}
+
+.not-found p {
+  margin: 1.5rem 0 2rem;
+  color: var(--ui-neutral-6);
+}
+
+@media (max-width: 480px) {
+  .not-found h1 {
+    font-size: 4rem;
+  }
+
+  .not-found h2 {
+    font-size: 1.5rem;
+  }
+}

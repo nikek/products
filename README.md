@@ -47,20 +47,20 @@ This project uses CSS modules to scope styles.
 ## Todo
 
 - [x] Fonts
-- [ ] Test main flows
+- [x] Test main flows
 - [x] Header
   - [x] HeaderLogo with hover and focus effects
-- [ ] Action bar
+- [x] Action bar
   - [x] String search
     - [x] Search as you type
     - [x] Custom filter
     - [x] Highlight search term
-  - [ ] Filter on product line using multiselect popover
+  - [x] Filter on product line using multiselect popover
   - [x] Toggle views (extra: using transitions)
 - [x] Table view
 - [x] Grid view
-- [ ] Single product page
-  - [ ] 404 page
+- [x] Single product page
+  - [x] 404 page
 
 ## Highlights
 

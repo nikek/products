@@ -7,6 +7,7 @@ import { memo } from "react";
 const List = memo(({ items }: { items: Product[] }) =>
   items.map((d, i) => (
     <article
+      key={d.id}
       className={classes.card}
       onMouseEnter={(e) => {
         // Preload image if we hover over it for more than 100ms
