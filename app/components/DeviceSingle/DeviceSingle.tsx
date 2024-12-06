@@ -1,5 +1,5 @@
 import type { Product } from "~/types";
-import classes from "./Device.module.css";
+import classes from "./DeviceSingle.module.css";
 import { Link } from "@remix-run/react";
 
 export default function Device({ device }: { device: Product }) {
@@ -54,11 +54,11 @@ export default function Device({ device }: { device: Product }) {
         </dl>
         <Link
           to={`/devices/${device.id}.json`}
-          className={classes.jsonLink}
+          className={`cta ${classes.jsonLink}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          View JSON
+          See All Details as JSON
         </Link>
       </div>
     </article>

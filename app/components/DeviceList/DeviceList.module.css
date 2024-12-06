@@ -1,0 +1,184 @@
+.wrapper {
+  padding-inline: 32px;
+
+  @media (max-width: 480px) {
+    padding-inline: 16px;
+  }
+}
+
+.card {
+  contain: layout paint;
+
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: max-content auto auto;
+  column-gap: 10px;
+
+  & .cardLink,
+  & header {
+    box-sizing: border-box;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+
+    height: 32px;
+    border-block-end: 1px solid var(--ui-neutral-3);
+  }
+
+  & .cardLink {
+    /* @media (prefers-reduced-motion: no-preference) {
+        animation: fadeIn 0.6s cubic-bezier(0.1, 0.77, 0.01, 1);
+        animation-delay: calc(var(--delay, 0) + 100ms);
+      } */
+    border-block-start: 1px solid transparent;
+
+    &:hover {
+      background-color: var(--ui-neutral-2);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-block: 1px solid var(--ui-ublue-6);
+    }
+  }
+
+  & header {
+    color: black;
+    font-weight: 600;
+    margin-block-start: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+    backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.2);
+
+    .line {
+      grid-column-start: 2;
+    }
+    .name {
+      grid-column-start: 3;
+    }
+  }
+
+  & figure {
+    margin: 0;
+
+    & > img {
+      display: block;
+      width: 24px;
+    }
+  }
+
+  & p {
+    margin: 0;
+  }
+
+  & .card,
+  & .content {
+    display: contents;
+  }
+
+  & .short {
+    display: none;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  padding-block: 20px;
+  gap: 1rem;
+
+  header {
+    display: none;
+  }
+
+  .card {
+    position: relative;
+    max-width: 250px;
+    box-sizing: border-box;
+
+    background-color: white;
+    border: 1px solid var(--ui-neutral-3);
+    border-radius: 8px;
+
+    transition-duration: 600ms;
+    transition-timing-function: cubic-bezier(0.1, 0.77, 0.01, 1);
+    transition-property: opacity, translate;
+    transition-delay: var(--delay, 0);
+
+    &:hover {
+      background-color: var(--ui-neutral-1);
+
+      figure {
+        background-color: var(--ui-neutral-2);
+      }
+    }
+
+    &:focus-within {
+      outline: 1px solid var(--ui-ublue-6);
+    }
+
+    *:focus-visible {
+      outline: none;
+    }
+
+    figure {
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding-block: 0.5rem;
+      background-color: var(--ui-neutral-1);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .line {
+      display: block;
+      position: absolute;
+      inset-block-start: 2px;
+      inset-inline-end: 2px;
+      padding: 4px;
+      background: white;
+      border-radius: 4px;
+      color: var(--ui-ublue-6);
+    }
+
+    p {
+      padding: 8px;
+      margin: 0;
+    }
+
+    .name {
+      color: black;
+      margin-block: 2px 6px;
+    }
+    .short {
+      font-size: 12px;
+    }
+  }
+
+  .cardLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .label,
+  .name,
+  .short {
+    pointer-events: auto;
+  }
+}
+
+/* Add hover effect for table rows */
+.table article:hover > * {
+  background-color: var(--ui-neutral-2);
+}

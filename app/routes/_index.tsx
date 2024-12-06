@@ -1,7 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { useEffect, useState } from "react";
-import Table from "~/components/Table/Table";
-import ProductGrid from "~/components/ProductGrid/ProductGrid";
 import ViewToggle from "~/components/ViewToggle/ViewToggle";
 import Search from "~/components/Search/Search";
 import type { ViewTypes, Product } from "~/types";
@@ -10,6 +8,7 @@ import uidb from "../public.json";
 import Filter from "~/components/Filter/Filter";
 import { flushSync } from "react-dom";
 import { useSearchParams } from "@remix-run/react";
+import ProductList from "~/components/DeviceList/DeviceList";
 
 const lines = Array.from(
   uidb.devices
@@ -66,16 +65,15 @@ export default function Index() {
 
   return (
     <>
-      <section
-        style={{
-          marginInline: 32,
-          display: "flex",
-          gap: "8px",
-          marginBlock: "1rem",
-        }}
-      >
+      <section className="controls">
         <div
-          style={{ flex: 1, display: "flex", gap: "8px", alignItems: "center" }}
+          style={{
+            flex: 1,
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
           <Search setSearch={setSearch} />
           <small style={{ width: "max-content", whiteSpace: "nowrap" }}>
@@ -90,8 +88,7 @@ export default function Index() {
         />
         <Filter lines={lines} setFilter={setFilter} />
       </section>
-      {view === "list" && <Table items={items} />}
-      {view === "grid" && <ProductGrid items={items} />}
+      <ProductList items={items} layout={view} />
     </>
   );
 }

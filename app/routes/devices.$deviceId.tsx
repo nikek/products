@@ -1,8 +1,8 @@
 import invariant from "tiny-invariant";
 import uidb from "../public.json";
-import { Link, useLoaderData, useNavigate } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { LoaderFunctionArgs } from "@remix-run/server-runtime";
-import Device from "~/components/Device/Device";
+import Device from "~/components/DeviceSingle/DeviceSingle";
 import type { Product } from "~/types";
 
 export const loader = async ({
@@ -44,30 +44,22 @@ const LeftCaret = ({ style }: { style?: React.CSSProperties }) => (
 
 export default function devices() {
   const { current, prev, next } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
+
   return (
     <main>
       <nav style={{ margin: "1rem", display: "flex", gap: "4px" }}>
-        <div style={{ flex: 1 }}>
-          <button className="btn big-btn-shadow" onClick={() => navigate("/")}>
+        <div style={{ flex: 1, justifyItems: "flex-start" }}>
+          <Link className="btn big-btn-shadow btn-back" to="/">
             <LeftCaret /> Back
-          </button>
+          </Link>
         </div>
         {prev ? (
-          <Link
-            className="btn big-btn-shadow"
-            aria-disabled={!prev}
-            to={`/devices/${prev?.id}`}
-          >
+          <Link className="btn big-btn-shadow" to={`/devices/${prev?.id}`}>
             <LeftCaret />
           </Link>
         ) : null}
         {next ? (
-          <Link
-            className="btn big-btn-shadow"
-            aria-disabled={!next}
-            to={`/devices/${next?.id}`}
-          >
+          <Link className="btn big-btn-shadow" to={`/devices/${next?.id}`}>
             <LeftCaret style={{ transform: "rotate(180deg)" }} />
           </Link>
         ) : null}
