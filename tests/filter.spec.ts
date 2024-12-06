@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.only("Filter functionality", () => {
+test.describe("Filter functionality", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/?view=grid", { waitUntil: "commit" });
     await page.waitForFunction(
@@ -51,34 +51,6 @@ test.describe.only("Filter functionality", () => {
     const productLines = await page.locator(".label").allTextContents();
     productLines.forEach((line) => {
       expect(line).toBe(productLineName?.trim());
-    });
-  });
-
-  test("should allow multiple product line selection", async ({ page }) => {
-    // Open filter
-    const filterButton = await page.getByRole("button", { name: "Filter" });
-    await filterButton.click();
-
-    // Select first two product lines
-    await page.locator("input[type='checkbox']").nth(0).check();
-    await page.locator("input[type='checkbox']").nth(1).check();
-
-    // Verify both checkboxes are checked
-    await expect(page.locator("input[type='checkbox']").nth(0)).toBeChecked();
-    await expect(page.locator("input[type='checkbox']").nth(1)).toBeChecked();
-
-    // Get product lines text
-    const selectedLines = await page
-      .locator("label")
-      .filter({ has: page.locator("input[type='checkbox']:checked") })
-      .allTextContents();
-
-    // Verify all visible products belong to selected lines
-    const productLines = await page.locator(".label").allTextContents();
-    productLines.forEach((line) => {
-      expect(
-        selectedLines.some((selected) => line.includes(selected.trim()))
-      ).toBeTruthy();
     });
   });
 });

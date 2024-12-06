@@ -65,7 +65,7 @@
 
   :global(.react-aria-ListBox) {
     display: block;
-    width: unset;
+    width: inherit;
     max-height: inherit;
     min-height: unset;
     border: none;
